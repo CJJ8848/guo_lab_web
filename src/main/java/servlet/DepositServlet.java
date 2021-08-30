@@ -21,8 +21,8 @@ public class DepositServlet extends HttpServlet {
         String d2S441 = request.getParameter("d2S441");
         String d3S1358 = request.getParameter("d3S1358");
         String d5S818 = request.getParameter("d5S818");
-        Cellline cellline = new Cellline(id,TPOX,d2S441,d3S1358,d5S818);
-        celllineService.deposit(cellline);
+        ///Cellline cellline = new Cellline(id,TPOX,d2S441,d3S1358,d5S818);
+        ///celllineService.deposit(cellline);
         request.getRequestDispatcher("/jsp/deposit_success.jsp").forward(request,response);
     }
 
