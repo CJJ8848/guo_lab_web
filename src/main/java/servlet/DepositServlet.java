@@ -1,29 +1,51 @@
 package servlet;
 
 import domain.Cellline;
+import domain.Markers;
 import service.CelllineServiceImpl;
 import service.ICelllineService;
+import service.IMarkerService;
+import service.MarkerServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @WebServlet("/deposit")
 public class DepositServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ICelllineService celllineService = new CelllineServiceImpl();
+        IMarkerService markerService = new MarkerServiceImpl();
+        String cellline = request.getParameter("deposit-cellline");
         String id = request.getParameter("id");
-        String TPOX = request.getParameter("TPOX");
-        String d2S441 = request.getParameter("d2S441");
-        String d3S1358 = request.getParameter("d3S1358");
-        String d5S818 = request.getParameter("d5S818");
+        String TPOX = request.getParameter("deposit-TPOX");
+        String amelx = request.getParameter("deposit-Amelogenin_chrX");
+        String amely = request.getParameter("deposit-Amelogenin_chrX");
+        Boolean x = false;
+        Boolean y = false;
+        if (amelx=="X" | amelx == "x"){
+            x = true;
+        }
+        if (amely=="Y" | amely == "y"){
+            y = true;
+        }
+        String[] single = TPOX.split(",");
+        ArrayList<Integer> record = new ArrayList<>();
+        for (String i:single){
+            int in = Integer.parseInt(i);
+            record.add(in);
+        }
+        Markers markers = new Markers(cellline,"TPOXtest",x,y,record);
+        markerService.deposit(markers,"HomoSapiens");
         ///Cellline cellline = new Cellline(id,TPOX,d2S441,d3S1358,d5S818);
         ///celllineService.deposit(cellline);
-        request.getRequestDispatcher("/jsp/deposit_success.jsp").forward(request,response);
+        request.getRequestDispatcher("/jsp/header.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

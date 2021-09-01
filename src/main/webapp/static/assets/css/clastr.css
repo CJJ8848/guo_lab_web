@@ -232,8 +232,8 @@ select:-moz-focusring {
     display:flex;
     justify-content: space-between;
     background-color:#f0f0f0;
-    border: 1px solid #ccc;
 }
+
 #form-body-left {
     position: relative;
     flex-basis: 527px;
@@ -282,6 +282,31 @@ select:-moz-focusring {
 #form-body-left img{
     pointer-events: none;
     opacity: .13;
+    position: absolute;
+    right: 50px;
+    bottom: 20px;
+}
+
+#form-body-deposit {
+    display:flex;
+    background-color:#fafafa;
+    padding: 0 0 0 20px;
+}
+
+
+#form-body-deposit .active {
+    pointer-events: none;
+    color: #555;
+    background-color:#fafafa;
+    border-bottom: 0;
+}
+
+#form-body-deposit #markers-title {
+    margin-top: -13px;
+}
+#form-body-deposit img{
+    pointer-events: none;
+    opacity: 0.5;
     position: absolute;
     right: 50px;
     bottom: 20px;
@@ -365,6 +390,25 @@ select:-moz-focusring {
     cursor:pointer;
 }
 #search:active {
+    background-color: #c1ccd4;
+}
+#deposit {
+    font-size:13px;
+    padding:5px;
+    font-weight: bold;
+    background-color: #e1e1e1;
+    width: 80%;
+    margin: 0 auto 15px auto;
+    border: 1px solid #b9b9b9;
+    border-radius: 4px;
+}
+#deposit:hover {
+    background-color: #d6e2eb;
+    border-color: #98afcd;
+    color: #90ac9b;
+    cursor:pointer;
+}
+#deposit:active {
     background-color: #c1ccd4;
 }
 #form-buttons button{

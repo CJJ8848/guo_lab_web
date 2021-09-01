@@ -3,7 +3,6 @@
 package dao;
 
 import dbutils.DBUtils;
-import domain.Cellline;
 import domain.Markers;
 
 import java.sql.Array;
@@ -69,11 +68,11 @@ public class MarkerdaoImpl implements IMarkerdao {
 
                     String sql2 = "update ? set Record=? where CelllineName=? and Marker=?";
                     PreparedStatement preparedStatement2 = connection.prepareStatement(sql2);
-                    preparedStatement.setString(1, tableName);
-                    preparedStatement.setArray(2, (Array) list2); //不知道java的array能不能直接传入表里？
-                    preparedStatement.setString(3, CelllineName);
-                    preparedStatement.setString(4, Marker);
-                    preparedStatement.execute();
+                    preparedStatement2.setString(1, tableName);
+                    preparedStatement2.setArray(2, (Array) list2); //不知道java的array能不能直接传入表里？
+                    preparedStatement2.setString(3, CelllineName);
+                    preparedStatement2.setString(4, Marker);
+                    preparedStatement2.execute();
 
                 } else System.out.println("Record is duplicated!");
 
@@ -114,27 +113,9 @@ public class MarkerdaoImpl implements IMarkerdao {
 
     }
 
+    @Override
     public List<Markers> find(String query) {
-        List<Markers> celllines = new ArrayList();
-        DBUtils.execSQL((connection) -> {
-            try {
-                PreparedStatement preparedStatement = connection.prepareStatement("select id, TPOX, D2S441, D3S1358, D5S818 from drug");
-                ResultSet resultSet = preparedStatement.executeQuery();
-
-                while(resultSet.next()) {
-                    String id = resultSet.getString("id");
-                    String TPOX = resultSet.getString("TPOX");
-                    String D2S441 = resultSet.getString("D2S441");
-                    String D3S1358 = resultSet.getString("D3S1358");
-                    String D5S818 = resultSet.getString("D5S818");
-                    //Cellline cellline = new Cellline(id, TPOX, D2S441, D3S1358, D5S818);
-                    //celllines.add(cellline);
-                }
-            } catch (SQLException var10) {
-                log.info("", var10);
-            }
-
-        });
-        return celllines;
+        return null;
     }
+
 }

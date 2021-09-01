@@ -16,16 +16,21 @@ public class DBUtils {
         Connection connection = null;
         AppConfig appConfig = AppConfig.getInstance();
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            //Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("org.postgresql.Driver");
+            System.out.println("Driver ok");
         } catch (ClassNotFoundException e) {
             log.info("", e);
+            System.out.println("Driver failed.");
         }
         try {
             connection = DriverManager.getConnection(appConfig.getJdbcUrl()
                     , appConfig.getJdbcUsername()
                     , appConfig.getJdbcPassword());
+            System.out.println("connection ok");
         } catch (SQLException e) {
             log.info("", e);
+            System.out.println("DB failed");
         }
         return connection;
     }
