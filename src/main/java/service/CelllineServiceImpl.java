@@ -1,11 +1,6 @@
 package service;
 
-import dao.ICelllinedao;
-import dao.ICelllinedao;
-import dao.CelllinedaoImpl;
 import domain.Cellline;
-import domain.Cellline;
-import service.ICelllineService;
 
 import java.util.List;
 

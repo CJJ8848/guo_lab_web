@@ -28,13 +28,13 @@
 </head>
 <body>
 <main id="content">
-    <div id="form">
+    <form id="form" action="<%=request.getContextPath()%>/deposit" method="post">
         <div id="form-header">
             <h1 id="form-title" class="unselectable">NGSTR <span id="form-version">1.0 -Guo lab</span></h1>
             <span id="form-subtitle" class="unselectable">A NGS-based STR similarity search tool</span>
         </div>
-        <form id="form-body" action="<%=request.getContextPath()%>/deposit" method="post">
-            <div id="form-body-deposit">
+        <div id="form-body">
+            <div id="form-body-deposit" style="display:inline;">
                 <h2 class="unselectable" style="margin: 20px auto 15px 30px;">Cellline</h2>
                 <table style="padding-left:10px;margin: 0px auto 0px 55px;" class="markers">
                     <tr>
@@ -177,14 +177,14 @@
                         </tr>
                     </table>
                     <div class="sample-label" id="sample-human"></div>
-                    <button id="search" type="submit" style="font-size: 10px;width: 20%;margin: 40px auto 15px 300px;">Deposit</button>
+                    <button id="search" type="submit" style="font-size: 10px;width: 20%;margin: 40px auto 15px 260px;">Deposit</button>
 
                 </div>
 
             </div>
-        </form>
-    </div>
-    </div>
+        </div>
+
+    </form>
     <noscript>
         <div class="alert error" style="display: block">
             <span><strong>Error:</strong>&nbsp;JavaScript seems to be blocked by a browser extension.</span>

@@ -367,73 +367,7 @@ function launchAlert(response, status, xhr) {
     alert(alertText);
 }
 
-function search() {
-    let jsonQuery = {};
 
-    let defaultMarkers = markers[species]["default"];
-    for (let i = 0; i < defaultMarkers.length; i++){
-        let v = document.getElementById("input-" + defaultMarkers[i]).value.split(" ").join("");
-        if (v !== '') {
-            jsonQuery[defaultMarkers[i].split("_").join(" ")] = v;
-        }
-    }
-    let optionalMarkers = markers[species]["optional"];
-    for (let i = 0; i < optionalMarkers.length; i++) {
-        let v = document.getElementById("input-" + optionalMarkers[i]).value.split(" ").join("");
-        if (v !== '') {
-            jsonQuery[optionalMarkers[i].split("_").join(" ")] = v;
-        }
-    }
-    if (Object.keys(jsonQuery).length === 0) {
-        document.getElementById("results").style.display = "none";
-        document.getElementById("warning").style.display = "block";
-        $("#warning").animate({opacity: 1}, 400, "swing");
-        document.getElementById("warning").scrollIntoView({behavior: 'smooth', block: "end", inline: "nearest"});
-        return;
-    }
-    jsonQuery["outputFormat"] = "json";
-    jQuery.extend(jsonQuery, jsonParameters());
-    html.addClass("waiting");
-    $.ajax({
-        type: "POST",
-        url: "/cellosaurus-str-search/api/query",
-        data: JSON.stringify(jsonQuery),
-        contentType: "application/json",
-        dataType: "json",
-        success: function (response) {
-            if (response.results.length !== 0) {
-                jsonResponse = response;
-                table.build(response);
-
-                let results = $("#results");
-                if (results.width() > $("#content").width()) {
-                    $("#sib_header_small,#sib_footer").width(results.width())
-                } else {
-                    $("#sib_header_small,#sib_footer").width("100%");
-                }
-                document.getElementById("caption-count").innerText = response.searchSpace;
-                document.getElementById("caption-species").innerText = speciesNames[response.parameters.species];
-                document.getElementById("caption-release").innerText = response.cellosaurusRelease;
-
-                document.getElementById("results").style.display = "table";
-                results.animate({opacity: 1}, 1000, "swing");
-                document.getElementById("warning").style.display = "none";
-                document.getElementById('caption').scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
-            } else {
-                document.getElementById("results").style.display = "none";
-                document.getElementById("warning").style.display = "block";
-                $("#warning").animate({opacity: 1}, 400, "swing");
-                document.getElementById("warning").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
-            }
-        },
-        error: function (response, status, xhr) {
-            launchAlert(response, status, xhr);
-        },
-        complete: function () {
-            html.removeClass("waiting");
-        }
-    });
-}
 
 let table = {
     build: function (json) {

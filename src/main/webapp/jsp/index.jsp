@@ -25,7 +25,7 @@
 </head>
 <body>
 <main id="content">
-    <form id="form" action="<%=request.getContextPath()%>/match" method="post">
+    <form id="form" action="" method="post" name="indexform">
         <div id="form-header">
             <h1 id="form-title" class="unselectable">NGSTR <span id="form-version">1.0 -Guo lab</span></h1>
             <span id="form-subtitle" class="unselectable">A NGS-based STR similarity search tool</span>
@@ -279,15 +279,13 @@
                 </div>
                 <div id="form-start">
                     <h2 class="unselectable">Actions</h2>
-                    <button id="search" type="submit">Search</button>
+                    <button id="search" type="submit" onclick="match()">Search</button>
                 </div>
                 <div id="form-buttons">
                     <button id="load" onclick="importFile.openDialog()">Load File</button>
                     <button id="example" onclick="example()">Example</button>
                     <button id="reset" onclick="reset()">Reset</button>
-                    <a href="jsp/deposit.jsp">
-                        <button>Deposit</button>
-                    </a>
+                    <button type="button" onclick="deposit()">Deposit</button>
                     <div>
                         <button id="help" class="half" style="border-right:1px solid #ccc" onclick="window.open('help.html', '_blank');">Help</button>
                         <button id="about" class="half" onclick="window.open('about.html', '_blank');">About</button>
@@ -296,6 +294,16 @@
             </div>
         </div>
     </form>
+    <script>
+        function match(){
+            document.indexform.action="<%=request.getContextPath()%>/match";
+            document.indexform.submit();
+        }
+        function deposit(){
+            document.indexform.action="<%=request.getContextPath()%>/jsp/deposit.jsp";
+            document.indexform.submit();
+        }
+    </script>
     <noscript>
         <div class="alert error" style="display: block">
             <span><strong>Error:</strong>&nbsp;JavaScript seems to be blocked by a browser extension.</span>

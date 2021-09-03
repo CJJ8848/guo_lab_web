@@ -12,12 +12,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class MarkerdaoImpl implements IMarkerdao {
-    private static final Logger log = LoggerFactory.getLogger(CelllinedaoImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(MarkerdaoImpl.class);
 
     public MarkerdaoImpl() {
     }
@@ -91,18 +90,26 @@ public class MarkerdaoImpl implements IMarkerdao {
         String CelllineName = markers.getCelllineName();
         String Marker = markers.getMarker();
         List<Integer> Record = markers.getRecord();
+        System.out.println("test1");
         if (!Record.isEmpty())  {
+            System.out.println("test2");
             if (!markerdao.exist(CelllineName, Marker, TableName)) {
+                System.out.println("test3");
                 DBUtils.execSQL((connection) -> {
                     try {
+                        System.out.println("deposit start");
                         PreparedStatement preparedStatement = connection.prepareStatement("insert into ? values (?,?,?,?,?)");
                         preparedStatement.setString(1, TableName);
                         preparedStatement.setString(2, CelllineName);
                         preparedStatement.setString(3, Marker);
                         preparedStatement.setBoolean(4, markers.isAmelX());
                         preparedStatement.setBoolean(5, markers.isAmelY());
-                        preparedStatement.setArray(6, (Array) Record);
+
+                        //Array sqlArray = connection.createArrayOf("Integer", new List[]{Record});
+                        preparedStatement.setArray(6, null);
+                        System.out.println("new one");
                         preparedStatement.execute();
+                        System.out.println("deposit done");
                     } catch (SQLException var3) {
                         log.info("", var3);
                     }

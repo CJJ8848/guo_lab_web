@@ -29,10 +29,10 @@ public class DepositServlet extends HttpServlet {
         String amely = request.getParameter("deposit-Amelogenin_chrX");
         Boolean x = false;
         Boolean y = false;
-        if (amelx=="X" | amelx == "x"){
+        if (amelx == "x"){
             x = true;
         }
-        if (amely=="Y" | amely == "y"){
+        if ( amely == "y"){
             y = true;
         }
         String[] single = TPOX.split(",");
@@ -42,7 +42,13 @@ public class DepositServlet extends HttpServlet {
             record.add(in);
         }
         Markers markers = new Markers(cellline,"TPOXtest",x,y,record);
-        markerService.deposit(markers,"HomoSapiens");
+        System.out.println("x"+amelx);
+        System.out.println(cellline);
+        System.out.println(x);
+        System.out.println(y);
+        System.out.println(record);
+        System.out.println("???");
+        markerService.deposit(markers,"homosapiens");
         ///Cellline cellline = new Cellline(id,TPOX,d2S441,d3S1358,d5S818);
         ///celllineService.deposit(cellline);
         request.getRequestDispatcher("/jsp/header.jsp").forward(request,response);
